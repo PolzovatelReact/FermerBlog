@@ -24,4 +24,5 @@ export interface TypesBlog {
   type: string;
   category: string;
   url: string;
+  image_path: string;
 }
