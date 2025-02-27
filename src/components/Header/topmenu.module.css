@@ -1,0 +1,112 @@
+/*SHAPKA*/
+.top_menu {
+  background: #fff;
+  padding: 8px 0;
+}
+.top_menu_top_menu_block {
+  max-width: 1162px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  width: 98%;
+}
+.top_menu_top_menu_block_logo {
+  max-width: 137px;
+}
+.top_menu_top_menu_block_logo img {
+  height: 56px;
+}
+.top_menu_menu {
+  width: 100%;
+}
+.top_menu_menu_ul {
+  display: flex;
+  max-width: 420px;
+  padding: 0px;
+  gap: 0px;
+  justify-content: center;
+}
+.top_menu_menu_ul_users {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.top_menu_menu_ul_users a {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #777777;
+  padding: 4 16 4 16;
+  gap: 8px;
+  border-radius: 16px 16px 16px 0px;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+}
+.top_menu_menu_ul_users_after:after {
+  content: "";
+  width: 1px;
+  height: 16px;
+  background: #e7e7e7;
+  margin: 0 15px 0 15px;
+}
+.top_menu_menu_ul_active a,
+.top_menu_menu_ul_users a:hover {
+  background: #e7e7e7;
+  color: #231f20;
+}
+.top_menu_menu_ul_active a path,
+.top_menu_menu_ul_users a:hover path {
+  fill: #231f20;
+}
+.top_menu_menu_right {
+  width: initial;
+}
+.top_menu_menu_right_menu_right_ul {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
+.top_menu_menu_right_menu_right_li {
+  list-style: none;
+  display: flex;
+}
+.top_menu_menu_right_menu_right_li button {
+  background: none;
+  border: none;
+  padding: 0px;
+}
+.top_menu_menu_right_menu_right_li_after:after {
+  content: "";
+  width: 1px;
+  height: 16px;
+  background: #e7e7e7;
+  margin: 0 16px 0 16px;
+}
+.top_menu_menu_right_menu_right_ul_menu_right_li_arrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.top_menu_menu_right_status_event {
+  background: #1ab832;
+  width: 0px;
+  height: 0px;
+  display: block;
+  position: relative;
+  top: -16px;
+}
+.top_menu_menu_right_status_event_number {
+  color: #fff;
+  background: #1ab832;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 3px;
+  border-radius: 20px;
+}
+.top_menu_menu_right_active_status path {
+  fill: #2e81ff;
+}

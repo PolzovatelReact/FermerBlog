@@ -1,0 +1,39 @@
+.menuButton {
+  position: absolute;
+  top: 81px;
+  right: 164px;
+  width: 200px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.menuButton.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menuButton_list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuButton_item {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.menuButton_item:hover {
+  background-color: #f4f4f4;
+}

@@ -1,0 +1,29 @@
+.content_main {
+  display: flex;
+  gap: 24px;
+  margin: 24px auto 24px auto;
+  max-width: 1162px;
+  height: 85vh;
+  width: 98%;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Общие стили */
+.app {
+  text-align: center;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Светлая тема */
+.app.light {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Темная тема */
+.app.dark {
+  background-color: #121212;
+  color: #fff;
+}
