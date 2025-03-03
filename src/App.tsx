@@ -28,6 +28,8 @@ import Register from "./components/Pages/Auth/Register";
 import TestSql from "./components/TESTSQL/TestSql";
 import UploadFile from "./components/TESTSQL/UploadFile";
 import CreateTestPost from "./components/TESTSQL/CreateTestPost";
+import PeopleFarmers from "./components/People/PeopleFarmers";
+import FarmersPagesDetails from "./components/People/FarmersPagesDetails";
 
 // Защищенные маршруты
 const PrivateRoute = ({ element, isAuthenticated }: any) => {
@@ -89,6 +91,8 @@ const App: React.FC = () => {
           <Route path="/list/:category/:id" element={<TestDetailPage />} />
           <Route path="/uploadfile" element={<UploadFile />} />
           <Route path="/createtestpost" element={<CreateTestPost />} />
+          <Route path="/farmers" element={<PeopleFarmers />} />
+          <Route path="/farmers/:id" element={<FarmersPagesDetails />} />
           {/* <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
             <Route
               path="/profile"

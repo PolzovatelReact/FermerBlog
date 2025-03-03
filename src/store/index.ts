@@ -10,7 +10,7 @@ import registerReducer from "./auth-slice/registerSlice";
 import themeReducer from "./themeSlice/themeSlice";
 import eventsReducer from "./events/eventsSlice";
 import { postsBlog } from "./posts/blogReducer";
-
+import farmersReducer from "./people/farmersSlice";
 export const store = configureStore({
   reducer: {
     blog: postsBlog,
@@ -22,6 +22,7 @@ export const store = configureStore({
     reg: registerReducer,
     theme: themeReducer, // Смена режима: Переход на светлую сторону / Переход на темную сторону =)
     event: eventsReducer,
+    farmers: farmersReducer, // из sqlight данные фермера которые будут выводится на страницу фермеры
   },
 });
 export type AppDispatch = typeof store.dispatch;
