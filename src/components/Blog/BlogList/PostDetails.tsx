@@ -18,6 +18,7 @@ interface Post {
   type: string;
   category: string;
   url: string;
+  image_path: string;
 }
 
 const PostDetails: React.FC = () => {
@@ -63,6 +64,13 @@ const PostDetails: React.FC = () => {
 
       <div className={`${styles.blog_right} navTest ${theme}`}>
         <h1>{post.textTitle}</h1>
+        {post.image_path && (
+          <img
+            src={`http://localhost:5013/uploads/${post.image_path}`} // 👈 Выводим картинку
+            alt={post.textTitle}
+            style={{ maxWidth: "100%", height: "auto", borderRadius: "8px" }}
+          />
+        )}
         <div
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.textPage),

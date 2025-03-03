@@ -26,6 +26,8 @@ import Events from "./components/Pages/Events/Events";
 import EventsDetails from "./components/Pages/Events/EventsDetails";
 import Register from "./components/Pages/Auth/Register";
 import TestSql from "./components/TESTSQL/TestSql";
+import UploadFile from "./components/TESTSQL/UploadFile";
+import CreateTestPost from "./components/TESTSQL/CreateTestPost";
 
 // Защищенные маршруты
 const PrivateRoute = ({ element, isAuthenticated }: any) => {
@@ -85,6 +87,8 @@ const App: React.FC = () => {
           <Route path="/list" element={<TestListPage />} />
           <Route path="/list/:category" element={<TestCategoryPage />} />
           <Route path="/list/:category/:id" element={<TestDetailPage />} />
+          <Route path="/uploadfile" element={<UploadFile />} />
+          <Route path="/createtestpost" element={<CreateTestPost />} />
           {/* <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
             <Route
               path="/profile"
