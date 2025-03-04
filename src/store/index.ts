@@ -11,6 +11,8 @@ import themeReducer from "./themeSlice/themeSlice";
 import eventsReducer from "./events/eventsSlice";
 import { postsBlog } from "./posts/blogReducer";
 import farmersReducer from "./people/farmersSlice";
+import postsfarmerReducers from "./people/farmers-postsSlice";
+
 export const store = configureStore({
   reducer: {
     blog: postsBlog,
@@ -23,6 +25,7 @@ export const store = configureStore({
     theme: themeReducer, // Смена режима: Переход на светлую сторону / Переход на темную сторону =)
     event: eventsReducer,
     farmers: farmersReducer, // из sqlight данные фермера которые будут выводится на страницу фермеры
+    postsfarmer: postsfarmerReducers,
   },
 });
 export type AppDispatch = typeof store.dispatch;

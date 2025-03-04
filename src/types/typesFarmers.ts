@@ -16,3 +16,12 @@ export interface FarmersTypes {
   created_at: number;
   updated_at: number;
 }
+
+export interface FarmersPostsTypes {
+  id: number;
+  farmer_id: number;
+  title: string;
+  content: string;
+  image_url: string;
+  created_at: number;
+}

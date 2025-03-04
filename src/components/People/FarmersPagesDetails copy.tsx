@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchFarmers } from "../../store/people/farmersSlice";
 import { useParams } from "react-router-dom";
 import FarmersPosts from "./FarmersPosts";
+import { Link } from "react-router-dom";
 
 interface User {
   id: number;
@@ -10,7 +11,6 @@ interface User {
   last_name: string;
   email: string;
 }
-
 const FarmersPagesDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const { datas, isLoading, hasError } = useAppSelector(
@@ -40,7 +40,13 @@ const FarmersPagesDetails: React.FC = () => {
       <p> Email: {user.email}</p>
 
       <div>
-        <FarmersPosts farmer_id={id} />
+        <Link
+          to={`/farmers/${post.farmer_id}`}
+          style={{ textDecoration: "none", color: "blue" }}
+        >
+          <h3>Посты фермера #{post.farmer_id}</h3>
+        </Link>
+        <FarmersPosts />
       </div>
     </div>
   );
