@@ -81,7 +81,7 @@ const BlogList: React.FC = () => {
                       className={styles.category_link}
                     >
                       <span className={styles.category_link_text}>
-                        {categoryNames[post.type] || post.type}++
+                        {categoryNames[post.type] || post.type}
                       </span>
                     </Link>
                   </div>
