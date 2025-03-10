@@ -79,7 +79,6 @@ const PostDetails: React.FC = () => {
           }}
         />
         <a
-          href=""
           className={styles.blog_right_link_back_text}
           onClick={() => navigate(-1)}
           style={{ marginBottom: "10px", marginTop: "10px" }}
