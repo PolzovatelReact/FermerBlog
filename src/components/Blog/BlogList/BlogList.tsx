@@ -41,10 +41,15 @@ const BlogList: React.FC = () => {
     ? data.filter((post: { type: string }) => post.type === category)
     : data;
 
+  //Ограничение символов и добавление "..." при превышении
+  const truncateText = (text: string, limit: number): any => {
+    if (!text) return "";
+    return text.length > limit ? text.substring(0, limit) + "..." : text;
+  };
   return (
     <div>
       <div id="blog_header">
-        <h1 className={styles.blog_header_text}>Блог2</h1>
+        <h1 className={styles.blog_header_text}>Блог</h1>
       </div>
       <div className={styles.content_main}>
         <div id={`${styles.blog_left}`}>
@@ -67,17 +72,6 @@ const BlogList: React.FC = () => {
                   alt={post.metatitle}
                   className={styles.img_articles}
                 />
-                {/* {post.image_path && (
-                  <img
-                    src={`http://localhost:5013${post.image_path}`} // 👈 Вывод изображения
-                    alt={post.textTitle}
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                      borderRadius: "8px",
-                    }}
-                  />
-                )} */}
               </div>
               <div className={styles.articles_right}>
                 <div className={styles.articles_right_block}>
@@ -105,7 +99,9 @@ const BlogList: React.FC = () => {
                     <p className={styles.text_p}>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(post.textPage),
+                          __html: DOMPurify.sanitize(
+                            truncateText(post.textPage, 300)
+                          ),
                         }}
                       />
                     </p>
