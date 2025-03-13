@@ -14,11 +14,18 @@ interface BlogPost {
 
 const BlogList: React.FC = () => {
   const dispatch = useDispatch();
+  const [images, setImages] = useState<{ filename: string; url: string }[]>([]);
   // Достаем данные из Redux-хранилища
   const { postsblog, loading, error } = useSelector(
     (state: RootState) => state.blog
   );
 
+  useEffect(() => {
+    fetch("http://localhost:5013/images")
+      .then((res) => res.json())
+      .then((data) => setImages(data))
+      .catch((error) => console.error("Ошибка загрузки изображений:", error));
+  }, []);
   // Запускаем запрос при монтировании компонента
   useEffect(() => {
     dispatch(fetchBlog() as any); // Приводим к `any`, чтобы избежать ошибки TS
@@ -30,6 +37,15 @@ const BlogList: React.FC = () => {
   return (
     <div>
       <h2>📜 Список блогов</h2>
+
+      {images.map((img) => (
+        <img
+          key={img.filename}
+          src={img.url}
+          alt="Изображение"
+          style={{ width: "150px", height: "auto", borderRadius: "8px" }}
+        />
+      ))}
       {postsblog.map((blog) => (
         <div
           key={blog.id}

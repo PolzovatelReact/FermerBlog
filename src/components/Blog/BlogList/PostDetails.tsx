@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { fetchPosts } from "../../../store/posts/postsSlice";
 import { useParams, useNavigate } from "react-router-dom";
@@ -18,6 +20,7 @@ interface Post {
   type: string;
   category: string;
   url: string;
+  image_path: string;
 }
 
 const PostDetails: React.FC = () => {
@@ -63,17 +66,49 @@ const PostDetails: React.FC = () => {
 
       <div className={`${styles.blog_right} navTest ${theme}`}>
         <h1>{post.textTitle}</h1>
+        {post.image_path && (
+          <img
+            src={`http://localhost:5013/uploads/${post.image_path}`} // 👈 Выводим картинку
+            alt={post.textTitle}
+            style={{ maxWidth: "100%", height: "auto", borderRadius: "8px" }}
+          />
+        )}
         <div
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.textPage),
           }}
         />
-        <button onClick={() => navigate(-1)} style={{ marginBottom: "10px" }}>
+        <a
+          className={styles.blog_right_link_back_text}
+          onClick={() => navigate(-1)}
+          style={{ marginBottom: "10px", marginTop: "10px" }}
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.33333 15.8337L2.5 10.0003M2.5 10.0003L8.33333 4.16699M2.5 10.0003L17.5 10.0003"
+              stroke="#999999"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
           Вернуться назад
-        </button>
+        </a>
+        {/* <button
+          className={styles.blog_right_link_back_text}
+          onClick={() => navigate(-1)}
+          style={{ marginBottom: "10px" }}
+        >
+          Вернуться назад
+        </button> */}
       </div>
     </div>
   );
 };
-
 export default PostDetails;

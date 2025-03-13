@@ -45,44 +45,45 @@ const Header: React.FC = () => {
               <li
                 className={`${topmenu.top_menu_menu_ul_users} ${topmenu.top_menu_menu_ul_users_after}`}
               >
-                <NavLink to="/people">
+                <NavLink to="/people"> Люди</NavLink>
+                <a href="/people">
                   <span
                     className={`${topmenu.top_menu_menu_right_menu_right_ul_link_img}`}
                   >
                     <PeopleSVG />
                   </span>
                   <span className={`${topmenu.link_text}`}>Люди</span>
-                </NavLink>
+                </a>
               </li>
               <li
                 className={`${topmenu.top_menu_menu_ul_users} ${topmenu.top_menu_menu_ul_users_after}`}
               >
-                <NavLink to="/bloglist">
+                <a href="/bloglist">
                   <span
                     className={`${topmenu.top_menu_menu_right_menu_right_ul_link_img}`}
                   >
                     <BlogSVG />
                   </span>
                   <span className={`${topmenu.link_text}`}>Блог</span>
-                </NavLink>
+                </a>
               </li>
               <li
                 className={`${topmenu.top_menu_menu_ul_users} ${topmenu.top_menu_menu_ul_users_after}`}
               >
-                <NavLink to="/events">
+                <a href="/events">
                   <span className={`${topmenu.link_img}`}>
                     <MessagesSVG />
                   </span>
                   <span className={`${topmenu.link_text}`}>События</span>
-                </NavLink>
+                </a>
               </li>
               <li className={`${topmenu.top_menu_menu_ul_users}`}>
-                <NavLink to="/chats">
+                <a href="/chats">
                   <span className={`${topmenu.link_img}`}>
                     <MessagesSVG />
                   </span>
                   <span className={`${topmenu.link_text}`}>Сообщения</span>
-                </NavLink>
+                </a>
               </li>
             </ul>
           </div>

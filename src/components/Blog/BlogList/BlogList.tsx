@@ -41,10 +41,15 @@ const BlogList: React.FC = () => {
     ? data.filter((post: { type: string }) => post.type === category)
     : data;
 
+  //Ограничение символов и добавление "..." при превышении
+  const truncateText = (text: string, limit: number): any => {
+    if (!text) return "";
+    return text.length > limit ? text.substring(0, limit) + "..." : text;
+  };
   return (
     <div>
       <div id="blog_header">
-        <h1 className={styles.blog_header_text}>Блог2</h1>
+        <h1 className={styles.blog_header_text}>Блог</h1>
       </div>
       <div className={styles.content_main}>
         <div id={`${styles.blog_left}`}>
@@ -52,22 +57,6 @@ const BlogList: React.FC = () => {
             uniqueCategories={uniqueCategories}
             categoryNames={categoryNames}
           />
-          {/* <div className={`${styles.menu_left} navTest ${theme}`}>
-            <ul className={`${styles.menu_left_ul}`}>
-              {uniqueCategories.map((type) => (
-                <li key={type} className={styles.menu_left_li}>
-                  <Link
-                    to={`/bloglist/${type}`}
-                    className={styles.menu_left_link}
-                  >
-                    <span className={styles.text}>
-                      {categoryNames[type] || type}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
         </div>
 
         {/* Display filtered posts */}
@@ -78,7 +67,11 @@ const BlogList: React.FC = () => {
               className={`${styles.articles}  navTest ${theme}`}
             >
               <div className={styles.articles_left}>
-                <img alt={post.metatitle} className={styles.img_articles} />
+                <img
+                  src={`http://localhost:5013/uploads/${post.image_path}`}
+                  alt={post.metatitle}
+                  className={styles.img_articles}
+                />
               </div>
               <div className={styles.articles_right}>
                 <div className={styles.articles_right_block}>
@@ -88,7 +81,7 @@ const BlogList: React.FC = () => {
                       className={styles.category_link}
                     >
                       <span className={styles.category_link_text}>
-                        {categoryNames[post.type] || post.type}++
+                        {categoryNames[post.type] || post.type}
                       </span>
                     </Link>
                   </div>
@@ -106,7 +99,9 @@ const BlogList: React.FC = () => {
                     <p className={styles.text_p}>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(post.textPage),
+                          __html: DOMPurify.sanitize(
+                            truncateText(post.textPage, 300)
+                          ),
                         }}
                       />
                     </p>

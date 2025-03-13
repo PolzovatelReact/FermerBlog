@@ -26,7 +26,7 @@ const PeoplePages: React.FC = () => {
     <div>
       <p>Имя: {posts.name}</p>
       <p>Логин: {posts.login}</p>
-      <p> Email: {posts.email}</p>
+      <p>Email: {posts.email}</p>
     </div>
   );
 };

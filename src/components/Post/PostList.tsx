@@ -22,6 +22,17 @@ const PostList: React.FC = () => {
         {data.map((post) => (
           <li key={post.id}>
             <h2>{post.textTitle}</h2>
+            {post.image_path && (
+              <img
+                src={`http://localhost:5013${post.image_path}`} // 👈 Вывод изображения
+                alt={post.textTitle}
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                }}
+              />
+            )}
             <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(post.metadescription),

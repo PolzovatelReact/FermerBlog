@@ -1,51 +1,39 @@
 import React, { useEffect, useState } from "react";
-
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { fetchPeople } from "../../store/people/peopleSlice";
-import { Link } from "react-router-dom"; // Используем Link для переходов
-
-const People: React.FC = () => {
+import { fetchFarmers } from "../../store/people/farmersSlice";
+import { Link } from "react-router-dom";
+import people from "./people.module.css";
+//farm_type - напрвления фермы
+const PeopleFarmers: React.FC = () => {
   const dispatch = useAppDispatch();
   const { datas, isLoading, hasError } = useAppSelector(
-    (state) => state.people
+    (state) => state.farmers
   );
-
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDirection, setSelectedDirection] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
   useEffect(() => {
-    dispatch(fetchPeople());
+    dispatch(fetchFarmers());
   }, [dispatch]);
-
-  // Фильтрация
-  // const filteredUsers = datas.filter((user) =>
-  //   user.name.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
 
   // Получить список уникальных направлений
   const uniqueDirections = Array.from(
-    new Set(datas.map((user) => user.directions))
+    new Set(datas.map((user) => user.farm_type))
   );
   // Получить уникальные города из данных
-  const uniqueCities = Array.from(new Set(datas.map((user) => user.city)));
+  const uniqueCities = Array.from(new Set(datas.map((user) => user.location)));
 
-  // Фильтрация пользователей
-  const filteredUsers = datas.filter(
-    (user) => {
-      const matchesName = user.name
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
+  const filteredUsers = datas.filter((user) => {
+    const matchesName = user.username
+      ?.toLowerCase()
+      .includes(searchQuery?.toLowerCase() || "");
+    const matchesDirection =
+      !selectedDirection || user.farm_type === selectedDirection;
+    const matchesCity = !selectedCity || user.location === selectedCity;
 
-      const matchesDirection =
-        !selectedDirection || user.directions === selectedDirection;
-      const matchesCity = !selectedCity || user.city === selectedCity;
-
-      return matchesName && matchesDirection && matchesCity;
-    }
-
-    // user.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+    return matchesName && matchesDirection && matchesCity;
+  });
 
   if (isLoading) return <p> Загрузка...</p>;
   if (hasError) return <p> Ошибка</p>;
@@ -56,7 +44,7 @@ const People: React.FC = () => {
         type="text"
         placeholder="Введите имя для поиска"
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => setSearchQuery(e.target.value.trim())} // trim удаляем пустой пробел
       />
       <select
         value={selectedDirection}
@@ -72,7 +60,6 @@ const People: React.FC = () => {
       </select>
 
       {/* Выпадающий список для выбора города */}
-      <p>Выбрать город</p>
       <select
         value={selectedCity}
         onChange={(e) => setSelectedCity(e.target.value)}
@@ -85,13 +72,12 @@ const People: React.FC = () => {
           </option>
         ))}
       </select>
-
       {filteredUsers.length > 0 ? (
         <ul>
           {filteredUsers.map((user) => (
-            <li key={user._id}>
-              <Link to={`/people/${user._id}`}>{user.name}</Link> -{" "}
-              {user.directions} -{user.city}
+            <li key={user.id}>
+              <Link to={`/farmers/${user.id}`}>{user.username}</Link> -{" "}
+              {user.farm_type} -{user.location}
             </li>
           ))}
         </ul>
@@ -101,4 +87,4 @@ const People: React.FC = () => {
     </div>
   );
 };
-export default People;
+export default PeopleFarmers;
