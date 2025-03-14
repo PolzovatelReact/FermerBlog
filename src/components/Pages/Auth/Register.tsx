@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
-import { registerUser } from "../../../store/auth-slice/registerSlice"; // ✅ Импорт правильного слайса
+import { registerSqlUser } from "../../../store/auth-slice/regSqlSlice"; // ✅ Импорт правильного слайса
 import { useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
-  const [name, setName] = useState<string>(""); // ✅ Добавляем поле name
-  const [login, setLogin] = useState<string>(""); // ✅ Добавляем поле login
+  const [username, setName] = useState<string>(""); // ✅ Добавляем поле name
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -16,7 +15,7 @@ const Register: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(registerUser({ name, login, email, password })) // ✅ Теперь работает
+    dispatch(registerSqlUser({ username, email, password })) // ✅ Теперь работает
       .unwrap()
       .then(() => {
         navigate("/profile"); // ✅ Переход на профиль после успешной регистрации
@@ -25,7 +24,6 @@ const Register: React.FC = () => {
         console.error("Ошибка регистрации:", err);
       });
   };
-
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <form
@@ -33,7 +31,7 @@ const Register: React.FC = () => {
         className="bg-white p-8 rounded-lg shadow-md w-96"
       >
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Создание аккаунта 2
+          Создание аккаунта SQL
         </h2>
 
         {error && <div className="text-red-500 mb-4">{error}</div>}
@@ -46,23 +44,8 @@ const Register: React.FC = () => {
           <input
             type="text"
             id="name"
-            value={name}
+            value={username}
             onChange={(e) => setName(e.target.value)}
-            required
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        {/* Поле для логина */}
-        <div className="mb-4">
-          <label htmlFor="login" className="block text-sm font-medium">
-            Логин
-          </label>
-          <input
-            type="text"
-            id="login"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
             required
             className="w-full p-2 border rounded"
           />
@@ -110,5 +93,4 @@ const Register: React.FC = () => {
     </div>
   );
 };
-
 export default Register;

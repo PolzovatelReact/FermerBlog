@@ -1,85 +1,50 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { loginSqlUser } from "../../../store/auth-slice/authSqlSlice";
+import { useNavigate } from "react-router-dom";
 
 const Auth: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    login: "",
-    email: "",
-    password: "",
-  });
-  const [message, setMessage] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const dispatch = useAppDispatch();
+  const { loading, error, isAuthenticated } = useAppSelector(
+    (state) => state.auth
+  );
+  const navigate = useNavigate();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:5050/api/login",
-        formData
-      );
-      setMessage(response.data.message);
-    } catch (err) {
-      setMessage(
-        "Ошибка при регистрации. Проверьте данные и попробуйте снова."
-      );
-      console.error(err);
-    }
+    dispatch(loginSqlUser({ email, password }))
+      .unwrap()
+      .then(() => navigate("/profile"))
+      .catch((err) => {
+        console.error("Ошибка авторизации", err);
+      });
   };
-
   return (
     <div>
-      <h1>Создание аккаунта</h1>
+      <h2 className="text-2xl font-bold mb-6 text-center">Авторизация</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Имя:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Логин:</label>
-          <input
-            type="text"
-            name="login"
-            value={formData.login}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Пароль:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Зарегистрироваться</button>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? " Загрузка..." : "Войти"}
+        </button>
       </form>
-      {message && <p>{message}</p>}
     </div>
   );
 };
-
 export default Auth;
