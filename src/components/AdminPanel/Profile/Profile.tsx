@@ -14,6 +14,7 @@ const Profile: React.FC = () => {
         <h2>Данные аккаунта</h2>
         <p>Email: {user?.email}</p>
         <p>Логин: {user?.login}</p>
+        <p> {user?.created_at}</p>
       </div>
       <div>
         <h2>Пароль</h2>

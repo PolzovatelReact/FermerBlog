@@ -12,6 +12,8 @@ import eventsReducer from "./events/eventsSlice";
 import { postsBlog } from "./posts/blogReducer";
 import farmersReducer from "./people/farmersSlice";
 import postsfarmerReducers from "./people/farmers-postsSlice";
+import registerSqlReducers from "./auth-slice/regSqlSlice";
+import autSqlReducers from "./auth-slice/authSqlSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +28,8 @@ export const store = configureStore({
     event: eventsReducer,
     farmers: farmersReducer, // из sqlight данные фермера которые будут выводится на страницу фермеры
     postsfarmer: postsfarmerReducers,
+    registerSql: registerSqlReducers,
+    authsql: autSqlReducers, // Тестовая аутентификация пользователя SQL
   },
 });
 export type AppDispatch = typeof store.dispatch;

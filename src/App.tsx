@@ -31,6 +31,9 @@ import CreateTestPost from "./components/TESTSQL/CreateTestPost";
 import PeopleFarmers from "./components/People/PeopleFarmers";
 import FarmersPagesDetails from "./components/People/FarmersPagesDetails";
 import FarmersPosts from "./components/People/FarmersPosts";
+import TestReg from "./components/TESTSQL/TestReg";
+import TestAuth from "./components/TESTSQL/TestAuth";
+import ProfileTest from "./components/TESTSQL/Profile-test";
 
 // Защищенные маршруты
 const PrivateRoute = ({ element, isAuthenticated }: any) => {
@@ -94,6 +97,9 @@ const App: React.FC = () => {
           <Route path="/createtestpost" element={<CreateTestPost />} />
           <Route path="/farmers" element={<PeopleFarmers />} />
           <Route path="/farmers/:id" element={<FarmersPagesDetails />} />
+          <Route path="test-reg-sql" element={<TestReg />} />
+          <Route path="/teat-auth-sql" element={<TestAuth />} />
+          <Route path="/profile-test" element={<ProfileTest />} />
           {/* <Route path="/farmers/:id/:farmer_id" element={<FarmersPosts />} /> */}
           {/* <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
             <Route
