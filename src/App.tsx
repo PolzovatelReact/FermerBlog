@@ -30,7 +30,6 @@ import UploadFile from "./components/TESTSQL/UploadFile";
 import CreateTestPost from "./components/TESTSQL/CreateTestPost";
 import PeopleFarmers from "./components/People/PeopleFarmers";
 import FarmersPagesDetails from "./components/People/FarmersPagesDetails";
-import FarmersPosts from "./components/People/FarmersPosts";
 
 // Защищенные маршруты
 const PrivateRoute = ({ element, isAuthenticated }: any) => {

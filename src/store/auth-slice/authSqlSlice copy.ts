@@ -9,29 +9,21 @@ export interface AuthState {
   isLoading: boolean;
 }
 
-// Функция для загрузки данных из localStorage при старте
-const loadAuthState = (): AuthState => {
-  const token = localStorage.getItem("authToken");
-  const user = localStorage.getItem("user");
-
-  return {
-    isAuthenticated: !!token,
-    token: token || null,
-    user: user ? JSON.parse(user) : null,
-    error: null,
-    loading: false,
-    isLoading: false, // Завершаем загрузку после проверки
-  };
+const initialState: AuthState = {
+  isAuthenticated: false,
+  token: null,
+  user: null,
+  error: null,
+  loading: false,
+  isLoading: true, // Добавлено для загрузочного состояния
 };
-
-const initialState: AuthState = loadAuthState();
 
 // Асинхронный thunk для авторизации
 export const loginSqlUser = createAsyncThunk(
   "authsql/loginSqlUser",
   async (
     { email, password }: { email: string; password: string },
-    { dispatch, rejectWithValue }
+    { rejectWithValue }
   ) => {
     try {
       const response = await fetch("http://localhost:5013/login", {
@@ -52,9 +44,6 @@ export const loginSqlUser = createAsyncThunk(
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // ✅ Немедленно обновляем состояние, чтобы UI сразу изменился
-      dispatch(setToken({ token: data.token, user: data.user }));
-
       return data;
     } catch (error) {
       return rejectWithValue("Ошибка сервера");
@@ -70,7 +59,7 @@ const authSqlSlice = createSlice({
       state.token = action.payload.token;
       state.isAuthenticated = true;
       state.user = action.payload.user;
-      state.isLoading = false;
+      state.isLoading = false; // Завершаем загрузку
     },
     logout: (state) => {
       state.isAuthenticated = false;
@@ -81,7 +70,7 @@ const authSqlSlice = createSlice({
       localStorage.removeItem("user");
     },
     finishLoading: (state) => {
-      state.isLoading = false;
+      state.isLoading = false; // Завершение загрузки, если токена нет
     },
   },
   extraReducers: (builder) => {
@@ -90,9 +79,14 @@ const authSqlSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginSqlUser.fulfilled, (state) => {
+      .addCase(loginSqlUser.fulfilled, (state, action) => {
         state.loading = false;
         state.isAuthenticated = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        localStorage.setItem("authToken", action.payload.token);
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
+        state.error = null;
       })
       .addCase(loginSqlUser.rejected, (state, action) => {
         state.loading = false;
