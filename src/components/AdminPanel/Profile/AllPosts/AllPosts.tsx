@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { fetchPostsFarmer } from "../../store/people/farmers-postsSlice";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooks";
+import { fetchPostsFarmer } from "../../../../store/people/farmers-postsSlice";
 
 interface FarmersPostsProps {
   farmer_id: string | undefined; // ✅ Теперь `farmer_id` передаётся как пропс
 }
 
-const FarmersPosts: React.FC<FarmersPostsProps> = ({ farmer_id }) => {
+const AllPosts: React.FC<FarmersPostsProps> = ({ farmer_id }) => {
   const dispatch = useAppDispatch();
   const { datas, isLoading, hasError } = useAppSelector(
     (state) => state.postsfarmer
@@ -52,4 +52,4 @@ const FarmersPosts: React.FC<FarmersPostsProps> = ({ farmer_id }) => {
   );
 };
 
-export default FarmersPosts;
+export default AllPosts;

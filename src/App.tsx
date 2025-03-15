@@ -108,7 +108,7 @@ const App: React.FC = () => {
             element={
               <PrivateRoute
                 isAuthenticated={isAuthenticated}
-                element={<Profile />}
+                element={<Profile farmer_id={undefined} />}
               />
             }
           />
